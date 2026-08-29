@@ -12,17 +12,23 @@ PACKAGES=(
   aether
   alacritty
   btop
+  environment.d
   fastfetch
+  fcitx5
   fish
   fontconfig
   foot
   ghostty
   git
   hypr
+  hyprland-preview-share-picker
   imv
   kitty
+  lazydocker
   lazygit
   mako
+  micro
+  misc
   nvim
   omarchy
   starship
@@ -31,6 +37,7 @@ PACKAGES=(
   uwsm
   walker
   waybar
+  wiremix
 )
 
 link_with_stow() {

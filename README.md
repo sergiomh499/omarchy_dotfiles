@@ -22,7 +22,13 @@ Organized into modular, [GNU Stow](https://www.gnu.org/software/stow/)-compatibl
 | `lazygit` | `~/.config/lazygit/` | Git TUI |
 | `fastfetch` | `~/.config/fastfetch/` | System info display |
 | `git` | `~/.config/git/` | Git global configuration |
+| `lazydocker` | `~/.config/lazydocker/` | Docker TUI |
+| `micro` | `~/.config/micro/` | Micro terminal editor |
+| `wiremix` | `~/.config/wiremix/` | Audio mixer config |
+| `fcitx5`, `environment.d` | `~/.config/fcitx5/`, `~/.config/environment.d/` | Input method configuration |
+| `hyprland-preview-share-picker` | `~/.config/hyprland-preview-share-picker/` | Screen sharing preview picker |
 | `omarchy` | `~/.config/omarchy/` | Custom Omarchy themes, hooks & branding |
+| `misc` | `~/.config/` | Terminal defaults (`xdg-terminals.list`) & `chromium-flags.conf` |
 | `scripts` | `~/` | Laptop & NVIDIA driver tuning scripts |
 | `packages` | `packages/` | Native & AUR package lists |
 
