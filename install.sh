@@ -116,6 +116,13 @@ main() {
 
   link_shell_files
 
+  # Re-apply current Omarchy theme if present
+  if command -v omarchy &>/dev/null && [ -f "$HOME/.config/omarchy/current/theme.name" ]; then
+    current_theme="$(cat "$HOME/.config/omarchy/current/theme.name")"
+    echo "==> Restoring Omarchy theme ($current_theme)..."
+    omarchy theme set "$current_theme" 2>/dev/null || true
+  fi
+
   # Ensure secrets template exists if not already present
   if [ ! -f "$HOME/.config/fish/conf.d/secrets.fish" ]; then
     mkdir -p "$HOME/.config/fish/conf.d"
