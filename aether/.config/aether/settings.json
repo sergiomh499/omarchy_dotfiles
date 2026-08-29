@@ -1,0 +1,9 @@
+{
+  "excludedApps": {},
+  "includeNeovim": true,
+  "includeVscode": true,
+  "includeZed": true,
+  "selectedNeovimConfig": "",
+  "videoCpuMode": false,
+  "wallpaperFolder": "/home/sergio/Wallpapers"
+}

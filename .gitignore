@@ -1,0 +1,25 @@
+# Ignore sensitive files & credentials
+*secret*
+*.env.local
+.env
+.git-credentials
+.1Password/
+.ssh/
+.gnupg/
+
+# Fish runtime state
+fish_variables
+
+# Backups and temporary files
+*.bak
+*.bak.*
+*.backup.*
+*.tmp
+*.swp
+*~
+
+# Build artifacts & caches
+__pycache__/
+*.pyc
+node_modules/
+.cache/
