@@ -1,0 +1,69 @@
+providers:
+  # --- Perplexity Pro (inference) ---
+  # sonar models are OpenAI-compatible; sonar-pro and sonar-reasoning-pro
+  # include live web context in every response (grounded answers).
+  perplexity:
+    baseUrl: https://api.perplexity.ai
+    api: openai-completions
+    # Pull the stored OAuth JWT from agent.db at runtime — refreshes automatically
+    # when /login perplexity rotates the token.
+    apiKey: "!sqlite3 ~/.omp/agent/agent.db \"SELECT json_extract(data,'$.access') FROM auth_credentials WHERE provider='perplexity' LIMIT 1;\""
+    authHeader: true
+    disableStrictTools: true
+    models:
+      - id: sonar-pro
+        name: Perplexity Sonar Pro
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 8000
+        cost:
+          input: 3.00
+          output: 15.00
+          cacheRead: 0
+          cacheWrite: 0
+      - id: sonar-reasoning-pro
+        name: Perplexity Sonar Reasoning Pro
+        input: [text]
+        reasoning: true
+        contextWindow: 128000
+        maxTokens: 8000
+        cost:
+          input: 2.00
+          output: 8.00
+          cacheRead: 0
+          cacheWrite: 0
+      - id: sonar
+        name: Perplexity Sonar
+        input: [text]
+        contextWindow: 128000
+        maxTokens: 8000
+        cost:
+          input: 1.00
+          output: 1.00
+          cacheRead: 0
+          cacheWrite: 0
+
+  # --- OpenRouter: override routing for built-in provider ---
+  # Dynamic discovery loads all OpenRouter models. Configured to use verified active free models.
+  openrouter:
+    modelOverrides:
+      minimax/minimax-m3:free:
+        name: MiniMax M3 (Free - 1M Context)
+      nvidia/nemotron-3.5-lightning:free:
+        name: Nemotron 3.5 Lightning (Free - 1M Context)
+      z-ai/glm-5.2:free:
+        name: GLM 5.2 (Free - 256K Context)
+      google/gemma-4-31b-it:free:
+        name: Gemma 4 31B (Free - 262K Context)
+      poolside/laguna-s-2.1:free:
+        name: Laguna S 2.1 (Free - 262K Context)
+
+  # --- Google Antigravity: model overrides and context promotion ---
+  google-antigravity:
+    modelOverrides:
+      claude-sonnet-4-6:
+        contextPromotionTarget: google-antigravity/claude-sonnet-4-5
+      gemini-3.8-flash:
+        name: Gemini 3.8 Flash (1M Context)
+      gemini-3.1-flash-lite:
+        name: Gemini 3.1 Flash Lite (Fast / Smol)

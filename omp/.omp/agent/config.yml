@@ -1,0 +1,84 @@
+providers:
+  memoryModel: online
+  maxInFlightRequests:
+    google-antigravity: 4
+    openrouter: 2
+    perplexity: 2
+    nvidia: 2
+symbolPreset: unicode
+theme:
+  dark: dark-rose-pine
+  light: light
+setupVersion: 2
+modelRoles:
+  default: google-antigravity/gemini-3.8-flash
+  smol: google-antigravity/gemini-3.1-flash-lite
+  slow: google-antigravity/claude-opus-4-6
+  plan: google-antigravity/claude-sonnet-4-6:high
+  task: google-antigravity/claude-sonnet-4-6
+  designer: google-antigravity/gemini-3.8-flash
+  vision: google-antigravity/gemini-3.8-flash
+  tiny: google-antigravity/gemini-3.1-flash-lite
+  commit: google-antigravity/gemini-3.1-flash-lite
+  advisor: perplexity/sonar-reasoning-pro
+defaultThinkingLevel: auto
+statusLine:
+  transparent: false
+display:
+  showTokenUsage: true
+task:
+  showResolvedModelBadge: true
+  maxConcurrency: 3
+  agentModelOverrides:
+    scout: google-antigravity/gemini-3.1-flash-lite
+    reviewer: google-antigravity/claude-sonnet-4-6
+    designer: google-antigravity/gemini-3.8-flash
+    sonic: google-antigravity/gemini-3.1-flash-lite
+    task: google-antigravity/claude-sonnet-4-6
+    security-reviewer: google-antigravity/claude-sonnet-4-6
+retry:
+  enabled: true
+  modelFallback: true
+  baseDelayMs: 1000
+  fallbackChains:
+    default:
+      - google-antigravity/gemini-3.7-flash
+      - google-antigravity/claude-sonnet-4-6
+      - google-antigravity/gemini-3.1-pro
+      - openrouter/minimax/minimax-m3:free
+    slow:
+      - google-antigravity/claude-sonnet-4-6
+      - google-antigravity/gemini-3.1-pro
+      - perplexity/sonar-reasoning-pro
+      - openrouter/nvidia/nemotron-3.5-lightning:free
+    task:
+      - google-antigravity/gemini-3.8-flash
+      - google-antigravity/gemini-3.1-pro
+      - openrouter/minimax/minimax-m3:free
+    plan:
+      - google-antigravity/gemini-3.1-pro:high
+      - perplexity/sonar-reasoning-pro
+      - google-antigravity/gemini-3.8-flash:high
+    smol:
+      - google-antigravity/gemini-3.8-flash
+      - google-antigravity/gemini-3.7-flash
+      - openrouter/nvidia/nemotron-3.5-lightning:free
+memory:
+  backend: mnemopi
+bash:
+  autoBackground:
+    enabled: true
+skills:
+  customDirectories:
+    - /home/sergio/.omp/commands
+exa:
+  enabled: true
+compaction:
+  thresholdTokens: 200000
+  thresholdPercent: -1
+autolearn:
+  enabled: true
+edit:
+  mode: hashline
+composer:
+  shape: claude

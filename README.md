@@ -28,6 +28,7 @@ Organized into modular, [GNU Stow](https://www.gnu.org/software/stow/)-compatibl
 | `fcitx5`, `environment.d` | `~/.config/fcitx5/`, `~/.config/environment.d/` | Input method configuration |
 | `hyprland-preview-share-picker` | `~/.config/hyprland-preview-share-picker/` | Screen sharing preview picker |
 | `omarchy` | `~/.config/omarchy/` | Custom Omarchy themes, hooks & branding |
+| `omp` | `~/.omp/agent/` | Oh My Pi harness configuration & models |
 | `misc` | `~/.config/` | Terminal defaults (`xdg-terminals.list`) & `chromium-flags.conf` |
 | `scripts` | `~/` | Laptop & NVIDIA driver tuning scripts |
 | `packages` | `packages/` | Native & AUR package lists |

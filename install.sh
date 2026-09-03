@@ -31,6 +31,7 @@ PACKAGES=(
   misc
   nvim
   omarchy
+  omp
   starship
   swayosd
   tmux
@@ -88,6 +89,25 @@ link_shell_files() {
     fi
   done
 }
+link_omp_files() {
+  if [ -d "$DOTFILES_DIR/omp/.omp/agent" ]; then
+    echo "==> Linking OMP agent configs..."
+    mkdir -p "$HOME/.omp/agent"
+    for file in config.yml models.yml; do
+      if [ -f "$DOTFILES_DIR/omp/.omp/agent/$file" ]; then
+        target="$HOME/.omp/agent/$file"
+        if [ -e "$target" ] && [ ! -L "$target" ]; then
+          mkdir -p "$BACKUP_DIR"
+          echo "  backing up existing ~/.omp/agent/$file -> $BACKUP_DIR/"
+          mv "$target" "$BACKUP_DIR/"
+        fi
+        ln -sfn "$DOTFILES_DIR/omp/.omp/agent/$file" "$target"
+        echo "  symlinking ~/.omp/agent/$file"
+      fi
+    done
+  fi
+}
+
 
 install_packages() {
   echo "==> Installing system packages..."
@@ -122,6 +142,8 @@ main() {
   fi
 
   link_shell_files
+  link_omp_files
+
 
   # Re-apply current Omarchy theme if present
   if command -v omarchy &>/dev/null && [ -f "$HOME/.config/omarchy/current/theme.name" ]; then
