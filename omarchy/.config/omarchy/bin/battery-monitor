@@ -1,0 +1,60 @@
+#!/bin/bash
+# Omarchy battery monitor: multi-tier alerts & emergency shutdown on empty
+
+STATE_DIR="/run/user/$UID/omarchy_battery"
+mkdir -p "$STATE_DIR"
+
+# If AC connected or not discharging, reset notification state and cancel pending shutdown
+if omarchy-ac-present; then
+  rm -f "$STATE_DIR"/*
+  exit 0
+fi
+
+BATTERY_LEVEL=$(omarchy-battery-remaining)
+
+if [[ -z "$BATTERY_LEVEL" || ! "$BATTERY_LEVEL" =~ ^[0-9]+$ ]]; then
+  exit 0
+fi
+
+# 1. Critical shutdown cutoff: <= 3%
+if (( BATTERY_LEVEL <= 3 )); then
+  if [[ ! -f "$STATE_DIR/shutdown_pending" ]]; then
+    touch "$STATE_DIR/shutdown_pending"
+    notify-send -u critical -t 25000 \
+      "󰚥 Battery critically low (${BATTERY_LEVEL}%)" \
+      "Shutting down in 30 seconds to protect hardware and prevent data loss!\nPlug in AC now to cancel."
+    omarchy-hook battery-low "$BATTERY_LEVEL"
+
+    # Background countdown: checks AC again before poweroff
+    (
+      sleep 30
+      if ! omarchy-ac-present && [[ -f "$STATE_DIR/shutdown_pending" ]]; then
+        systemctl poweroff
+      fi
+    ) &
+  fi
+  exit 0
+fi
+
+# 2. Critical warning: <= 7%
+if (( BATTERY_LEVEL <= 7 )); then
+  if [[ ! -f "$STATE_DIR/critical" ]]; then
+    touch "$STATE_DIR/critical"
+    notify-send -u critical -t 20000 \
+      "󱐋 Battery critical (${BATTERY_LEVEL}%)" \
+      "Plug in charger immediately. System will safely shut down at 3%."
+    omarchy-hook battery-low "$BATTERY_LEVEL"
+  fi
+  exit 0
+fi
+
+# 3. Low warning: <= 15%
+if (( BATTERY_LEVEL <= 15 )); then
+  if [[ ! -f "$STATE_DIR/low" ]]; then
+    touch "$STATE_DIR/low"
+    notify-send -u normal -t 15000 \
+      "󱐋 Battery low (${BATTERY_LEVEL}%)" \
+      "Consider connecting AC power."
+    omarchy-hook battery-low "$BATTERY_LEVEL"
+  fi
+fi

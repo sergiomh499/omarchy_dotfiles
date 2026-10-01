@@ -34,5 +34,18 @@ echo "NOTE: zstd:3 takes effect for newly written data."
 echo "      To recompress existing data on /home run:"
 echo "      sudo btrfs filesystem defragment -r -czstd /home"
 echo ""
-echo "All done. No reboot required for irqbalance/swappiness."
+echo "=== [4/4] Configuring UPower critical action to PowerOff ==="
+mkdir -p /etc/UPower/UPower.conf.d
+cat > /etc/UPower/UPower.conf.d/50-battery-action.conf <<'EOF'
+[UPower]
+PercentageLow=15.0
+PercentageCritical=8.0
+PercentageAction=4.0
+CriticalPowerAction=PowerOff
+EOF
+systemctl restart upower
+echo "OK: UPower configured to PowerOff at 4% battery"
+
+echo ""
+echo "All done. No reboot required."
 echo "fstab change is live on next mount (reboot to confirm /home)."

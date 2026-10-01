@@ -33,6 +33,7 @@ PACKAGES=(
   omarchy
   omp
   starship
+  systemd
   swayosd
   tmux
   uwsm
@@ -146,10 +147,19 @@ main() {
 
 
   # Re-apply current Omarchy theme if present
-  if command -v omarchy &>/dev/null && [ -f "$HOME/.config/omarchy/current/theme.name" ]; then
-    current_theme="$(cat "$HOME/.config/omarchy/current/theme.name")"
-    echo "==> Restoring Omarchy theme ($current_theme)..."
-    omarchy theme set "$current_theme" 2>/dev/null || true
+  if command -v omarchy &>/dev/null; then
+    local theme_file=""
+    if [ -f "$HOME/.local/state/omarchy/current/theme.name" ]; then
+      theme_file="$HOME/.local/state/omarchy/current/theme.name"
+    elif [ -f "$HOME/.config/omarchy/current/theme.name" ]; then
+      theme_file="$HOME/.config/omarchy/current/theme.name"
+    fi
+
+    if [ -n "$theme_file" ]; then
+      current_theme="$(cat "$theme_file")"
+      echo "==> Restoring Omarchy theme ($current_theme)..."
+      omarchy theme set "$current_theme" 2>/dev/null || true
+    fi
   fi
 
   # Ensure secrets template exists if not already present

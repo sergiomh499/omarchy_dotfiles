@@ -177,7 +177,6 @@ noto-fonts-emoji
 nss-mdns
 nvidia-settings
 nvidia-utils
-obs-studio
 obsidian
 omarchy-keyring
 omarchy-nvim
@@ -189,7 +188,6 @@ pacman-contrib
 pamixer
 pavucontrol
 perl
-pinta
 pipewire-alsa
 pipewire-pulse
 pkgfile
@@ -221,7 +219,6 @@ satty
 sddm
 sg3_utils
 shelly
-signal-desktop
 slurp
 smartmontools
 snapper
