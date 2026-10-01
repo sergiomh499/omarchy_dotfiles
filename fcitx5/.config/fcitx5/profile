@@ -2,15 +2,15 @@
 # Group Name
 Name=Default
 # Layout
-Default Layout=us
+Default Layout=es
 # Default Input Method
-DefaultIM=keyboard-us
+DefaultIM=keyboard-es
 
 [Groups/0/Items/0]
 # Name
-Name=keyboard-us
+Name=keyboard-es
 # Layout
-Layout=
+# Layout=
 
 [GroupOrder]
 0=Default

@@ -13,7 +13,9 @@ fish_variables
 # Backups and temporary files
 *.bak
 *.bak.*
-*.backup.*
+*.backup*
+.*.backup*
+*.omasettings.bak
 *.tmp
 *.swp
 *~
@@ -23,3 +25,15 @@ __pycache__/
 *.pyc
 node_modules/
 .cache/
+
+# Omarchy cloned plugins and media
+omarchy/.config/omarchy/plugins/
+omarchy/.config/omarchy/lock-videos/
+
+# Cloned themes (managed by omarchy theme install)
+omarchy/.config/omarchy/themes/ghost-pastel/
+omarchy/.config/omarchy/themes/lawson-night/
+omarchy/.config/omarchy/themes/rose-pine-dark/
+omarchy/.config/omarchy/themes/terminus/
+
+
