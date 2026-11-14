@@ -32,6 +32,8 @@ PACKAGES=(
   nvim
   omarchy
   omp
+  agents
+  gemini
   starship
   systemd
   swayosd
@@ -91,9 +93,9 @@ link_shell_files() {
   done
 }
 link_omp_files() {
-  if [ -d "$DOTFILES_DIR/omp/.omp/agent" ]; then
-    echo "==> Linking OMP agent configs..."
-    mkdir -p "$HOME/.omp/agent"
+  if [ -d "$DOTFILES_DIR/omp/.omp" ]; then
+    echo "==> Linking OMP agent configs and commands..."
+    mkdir -p "$HOME/.omp/agent" "$HOME/.omp/commands"
     for file in config.yml models.yml; do
       if [ -f "$DOTFILES_DIR/omp/.omp/agent/$file" ]; then
         target="$HOME/.omp/agent/$file"
@@ -106,6 +108,29 @@ link_omp_files() {
         echo "  symlinking ~/.omp/agent/$file"
       fi
     done
+    for cmd in "$DOTFILES_DIR/omp/.omp/commands"/*; do
+      [ -e "$cmd" ] || continue
+      base="$(basename "$cmd")"
+      ln -sfn "$cmd" "$HOME/.omp/commands/$base"
+      echo "  symlinking ~/.omp/commands/$base"
+    done
+  fi
+}
+
+link_agent_ecosystem() {
+  echo "==> Linking Agent Ecosystem rules and skills..."
+  mkdir -p "$HOME/.agents/rules" "$HOME/.agents/skills/hermes" "$HOME/.gemini/config"
+  if [ -f "$DOTFILES_DIR/agents/.agents/rules/token-efficiency.md" ]; then
+    ln -sfn "$DOTFILES_DIR/agents/.agents/rules/token-efficiency.md" "$HOME/.agents/rules/token-efficiency.md"
+    echo "  symlinking ~/.agents/rules/token-efficiency.md"
+  fi
+  if [ -f "$DOTFILES_DIR/agents/.agents/skills/hermes/SKILL.md" ]; then
+    ln -sfn "$DOTFILES_DIR/agents/.agents/skills/hermes/SKILL.md" "$HOME/.agents/skills/hermes/SKILL.md"
+    echo "  symlinking ~/.agents/skills/hermes/SKILL.md"
+  fi
+  if [ -f "$DOTFILES_DIR/gemini/.gemini/config/GEMINI.md" ]; then
+    ln -sfn "$DOTFILES_DIR/gemini/.gemini/config/GEMINI.md" "$HOME/.gemini/config/GEMINI.md"
+    echo "  symlinking ~/.gemini/config/GEMINI.md"
   fi
 }
 
@@ -144,6 +169,7 @@ main() {
 
   link_shell_files
   link_omp_files
+  link_agent_ecosystem
 
 
   # Re-apply current Omarchy theme if present

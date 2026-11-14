@@ -1,0 +1,125 @@
+_config_version: 53
+_left_core_installed:
+  - homeassistant
+_left_core_scoped:
+  - homeassistant
+approvals:
+  destructive_slash_confirm: false
+auxiliary:
+  approval:
+    model: beam-free
+    provider: opencode-go
+  compression:
+    model: beam-free
+    provider: opencode-go
+  curator:
+    model: beam-free
+    provider: opencode-go
+  kanban_decomposer:
+    model: beam-free
+    provider: opencode-go
+  mcp:
+    model: beam-free
+    provider: opencode-go
+  profile_describer:
+    model: beam-free
+    provider: opencode-go
+  review:
+    model: beam-free
+    provider: opencode-go
+  title_generation:
+    model: beam-free
+    provider: opencode-go
+  triage_specifier:
+    model: beam-free
+    provider: opencode-go
+  vision:
+    model: beam-free
+    provider: opencode-go
+  voice_chat:
+    model: beam-free
+    provider: opencode-go
+dashboard:
+  theme: mono
+gateway:
+  host: 0.0.0.0
+  port: 8642
+kanban:
+  auto_decompose: false
+known_plugin_toolsets:
+  acp:
+    - homeassistant
+  webhook:
+    - homeassistant
+mcp_servers:
+  context7:
+    enabled: false
+    url: https://mcp.context7.com/mcp
+  deepwiki:
+    enabled: false
+    url: https://mcp.deepwiki.com/mcp
+  homarr:
+    enabled: true
+    headers:
+      ApiKey: 8656ceef.9a2754d0bf6bd41756519c1efb31a9af3148fb313cb04be0
+    url: https://homarr.homelab.local/api/mcp
+  kiwi:
+    enabled: false
+    tools:
+      include:
+        - search-flight
+    url: https://mcp.kiwi.com
+  strava:
+    auth: oauth
+    enabled: false
+    url: https://mcp.strava.com/mcp
+  trivago:
+    enabled: false
+    url: https://mcp.trivago.com/mcp
+memory:
+  provider: hindsight
+  backend: hindsight
+  hindsight_base_url: http://192.168.1.126:8888
+  path: /opt/data/memory.db
+model:
+  api_mode: chat_completions
+  base_url: https://opencode.ai/zen/go/v1
+  default: beam-free
+  provider: opencode-go
+  context_length: 64000
+platforms:
+  api_server:
+    enabled: true
+    extra:
+      host: 0.0.0.0
+      port: 8642
+  telegram:
+    enabled: true
+    home_channel:
+      chat_id: '4983947'
+      name: Arroz con Quejas
+      platform: telegram
+      user_id: '4983947'
+  webhook:
+    enabled: true
+    extra:
+      host: 0.0.0.0
+      port: 8644
+      secret: uptime-remediation-secret-2026
+  whatsapp:
+    enabled: false
+  whatsapp_cloud:
+    enabled: false
+plugins:
+  disabled: []
+  enabled:
+    - homeassistant
+telemetry:
+  shared_metrics:
+    enabled: false
+    offer_version: 2
+    send: false
+command_allowlist:
+  - stop/restart system service
+agent:
+  max_turns: 8

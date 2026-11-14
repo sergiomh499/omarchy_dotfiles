@@ -1,84 +1,124 @@
 providers:
-  memoryModel: online
   maxInFlightRequests:
-    google-antigravity: 4
+    opencode-go: 6
     openrouter: 2
     perplexity: 2
-    nvidia: 2
-symbolPreset: unicode
+    nvidia: 3
+symbolPreset: nerd
 theme:
-  dark: dark-rose-pine
+  dark: titanium
   light: light
-setupVersion: 2
+setupVersion: 3
+disabledProviders:
+  - ollama
+  - google-antigravity
+  - llama.cpp
+  - lm-studio
 modelRoles:
-  default: google-antigravity/gemini-3.8-flash
-  smol: google-antigravity/gemini-3.1-flash-lite
-  slow: google-antigravity/claude-opus-4-6
-  plan: google-antigravity/claude-sonnet-4-6:high
-  task: google-antigravity/claude-sonnet-4-6
-  designer: google-antigravity/gemini-3.8-flash
-  vision: google-antigravity/gemini-3.8-flash
-  tiny: google-antigravity/gemini-3.1-flash-lite
-  commit: google-antigravity/gemini-3.1-flash-lite
-  advisor: perplexity/sonar-reasoning-pro
-defaultThinkingLevel: auto
+  default: opencode-go/mimo-v2.6-flash
+  smol: opencode-go/beam-free
+  slow: opencode-go/deepseek-v4-pro
+  plan: opencode-go/deepseek-v4-pro
+  task: opencode-go/mimo-v2.6-flash
+  commit: opencode-go/beam-free
+  vision: opencode-go/mimo-v2-omni
+  designer: opencode-go/glm-5.3-flash
+  tiny: opencode-go/beam-free
+  memory: opencode-go/beam-free
+  judge: opencode-go/beam-free
+  advisor: opencode-go/mimo-v2.6-pro
+defaultThinkingLevel: low
 statusLine:
+  preset: default
+  separator: slash
   transparent: false
 display:
   showTokenUsage: true
+  shimmer: kitt
 task:
   showResolvedModelBadge: true
   maxConcurrency: 3
+  isolation:
+    enabled: true
   agentModelOverrides:
-    scout: google-antigravity/gemini-3.1-flash-lite
-    reviewer: google-antigravity/claude-sonnet-4-6
-    designer: google-antigravity/gemini-3.8-flash
-    sonic: google-antigravity/gemini-3.1-flash-lite
-    task: google-antigravity/claude-sonnet-4-6
-    security-reviewer: google-antigravity/claude-sonnet-4-6
+    task: opencode-go/mimo-v2.6-flash
+    scout: opencode-go/mimo-v2.6-flash
+    sonic: opencode-go/beam-free
+    designer: opencode-go/glm-5.3-flash
+    reviewer: opencode-go/mimo-v2.6-flash
+    security-reviewer: opencode-go/mimo-v2.6-flash
 retry:
   enabled: true
   modelFallback: true
   baseDelayMs: 1000
+  maxDelayMs: 300000
+  maxRetries: 10
+  fallbackOn: any
+  fallbackRevertPolicy: cooldown-expiry
+  usageAwareFallback: true
+  usageReservePct: 2
+  usageReservePolicy: auto
+  waitForUsageReset: false
   fallbackChains:
-    default:
-      - google-antigravity/gemini-3.7-flash
-      - google-antigravity/claude-sonnet-4-6
-      - google-antigravity/gemini-3.1-pro
-      - openrouter/minimax/minimax-m3:free
-    slow:
-      - google-antigravity/claude-sonnet-4-6
-      - google-antigravity/gemini-3.1-pro
-      - perplexity/sonar-reasoning-pro
-      - openrouter/nvidia/nemotron-3.5-lightning:free
-    task:
-      - google-antigravity/gemini-3.8-flash
-      - google-antigravity/gemini-3.1-pro
-      - openrouter/minimax/minimax-m3:free
-    plan:
-      - google-antigravity/gemini-3.1-pro:high
-      - perplexity/sonar-reasoning-pro
-      - google-antigravity/gemini-3.8-flash:high
-    smol:
-      - google-antigravity/gemini-3.8-flash
-      - google-antigravity/gemini-3.7-flash
-      - openrouter/nvidia/nemotron-3.5-lightning:free
+    opencode-go/beam-free:
+      - opencode-go/mimo-v2.6-flash
+      - opencode-go/mimo-v2.6-pro
+    opencode-go/mimo-v2.6-flash:
+      - opencode-go/beam-free
+      - opencode-go/mimo-v2.6-pro
+    opencode-go/mimo-v2.6-pro:
+      - opencode-go/mimo-v2.6-flash
+      - opencode-go/deepseek-v4-flash
+    opencode-go/deepseek-v4-pro:
+      - opencode-go/mimo-v2.6-pro
+      - opencode-go/glm-5.3-flash
+    opencode-go/glm-5.3-flash:
+      - opencode-go/mimo-v2.6-flash
+      - opencode-go/beam-free
 memory:
-  backend: mnemopi
+  backend: hindsight
+  hindsight:
+    apiUrl: https://hindsight-api.homelab.local
+    recallTypes:
+      - world
+      - experience
+    recallBudget: 6
+    recallMaxTokens: 1200
 bash:
-  autoBackground:
-    enabled: true
+  gitGuard: true
 skills:
   customDirectories:
     - /home/sergio/.omp/commands
 exa:
   enabled: true
+find:
+  enabled: "on"
 compaction:
-  thresholdTokens: 200000
+  thresholdTokens: 90000
   thresholdPercent: -1
 autolearn:
   enabled: true
+  autoContinue: true
+  minToolCalls: 8
 edit:
   mode: hashline
 composer:
   shape: claude
+title:
+  generator: tiny
+checkpoint:
+  enabled: true
+lsp:
+  diagnosticsOnEdit: true
+  formatOnWrite: true
+browser:
+  relay: true
+dev:
+  autoqaConsent: granted
+astGrep:
+  enabled: true
+update:
+  auto: true
+hindsight:
+  apiUrl: https://hindsight-api.homelab.local
+  bankId: default

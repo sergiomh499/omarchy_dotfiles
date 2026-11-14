@@ -28,7 +28,10 @@ Organized into modular, [GNU Stow](https://www.gnu.org/software/stow/)-compatibl
 | `fcitx5`, `environment.d` | `~/.config/fcitx5/`, `~/.config/environment.d/` | Input method configuration |
 | `hyprland-preview-share-picker` | `~/.config/hyprland-preview-share-picker/` | Screen sharing preview picker |
 | `omarchy` | `~/.config/omarchy/` | Custom Omarchy themes, hooks & branding |
-| `omp` | `~/.omp/agent/` | Oh My Pi harness configuration & models |
+| `omp` | `~/.omp/agent/`, `~/.omp/commands/` | Oh My Pi harness configuration, models & custom commands |
+| `agents` | `~/.agents/` | Global agent ecosystem rules, cross-delegation skills |
+| `gemini` | `~/.gemini/config/` | Antigravity CLI global guidelines (token efficiency, delegation) |
+| `hermes` | `hermes/` | Hermes Agent config, SOUL & homelab skills (`sync-hermes.sh`) |
 | `misc` | `~/.config/` | Terminal defaults (`xdg-terminals.list`) & `chromium-flags.conf` |
 | `scripts` | `~/` | Laptop & NVIDIA driver tuning scripts |
 | `packages` | `packages/` | Native & AUR package lists |
