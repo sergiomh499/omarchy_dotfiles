@@ -32,11 +32,16 @@ ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "agy --prompt TASK_DESCRIPTION"
 ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "omp --prompt TASK_DESCRIPTION"
 ```
 
-### 3. Send a prompt to an existing Herdr Agent pane
+### 3. Prompt a running agent in a hc terminal (herdr-app)
 ```bash
-# Check running agents
-ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "herdr agent list"
+# List live terminals (hc = herdr-core CLI; on the portatil it lives in ~/.local/bin)
+ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "export PATH=\$HOME/.local/bin:\$PATH; hc ls"
 
-# Submit a prompt to a specific agent (e.g. agy or omp)
-ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "herdr agent prompt agy TASK_DESCRIPTION --wait"
+# Paste a prompt into a terminal (address from hc ls, e.g. t3). NEVER --wait:
+# the timeout kills the turn and the answer is lost (see quota-aware-dispatch).
+ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "export PATH=\$HOME/.local/bin:\$PATH; hc send <terminal> 'TASK_DESCRIPTION'"
+
+# Status and final report
+ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "export PATH=\$HOME/.local/bin:\$PATH; hc get <terminal> --json"
+ssh -o BatchMode=yes -p 2222 sergio@127.0.0.1 "export PATH=\$HOME/.local/bin:\$PATH; hc read <terminal>"
 ```
