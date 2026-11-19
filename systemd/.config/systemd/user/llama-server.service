@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-Environment="LD_LIBRARY_PATH=/home/sergi/.local/llama.cpp/bin"
+Environment="LD_LIBRARY_PATH=/home/sergi/.local/llama.cpp/lib:/home/sergi/.local/llama.cpp/bin"
 WorkingDirectory=/home/sergi/.local/llama.cpp
 ExecStart=/home/sergi/.local/llama.cpp/bin/llama-server \
   --model /home/sergi/.local/llama.cpp/models/qwen3.8-27b-atx-swift.gguf \
