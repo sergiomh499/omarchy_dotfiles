@@ -1,0 +1,12 @@
+[Unit]
+Description=Bridge from hc (herdr-core) events to Telegram
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/sergi/programming/homelab-ops/scripts/hc-telegram-bridge.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
