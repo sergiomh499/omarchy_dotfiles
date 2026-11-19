@@ -1,10 +1,11 @@
-# Proveedor local (torre RTX 3080 Ti, ollama en 11434).
+# Proveedor local (torre RTX 3080 Ti, llamAmpere / llama.cpp proxy en 11434).
 # El default sigue siendo "auto" (opencode beam-free) — esto solo AÑADE una opción.
-# Uso: hermes chat --provider torre --model qwen3.5:4b
+# Uso: hermes chat --provider torre --model qwen3.8:27b
 providers:
   torre:
     base_url: "http://192.168.1.40:11434/v1"
     api_key: "ollama"
+    timeout: 240
 model:
   default: longcat-2.5-free
   provider: opencode-go
@@ -23,7 +24,7 @@ fallback_providers:
     model: mimo-v2.6-flash
     base_url: https://opencode.ai/zen/go/v1
   - provider: torre
-    model: qwen3.5:4b
+    model: qwen3.8:27b
     base_url: http://192.168.1.40:11434/v1
     api_mode: chat_completions
 _config_version: 53

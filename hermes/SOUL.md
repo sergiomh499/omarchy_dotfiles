@@ -22,6 +22,20 @@ primera línea (no recortes filas, no cambies `█`/`░`, no metas emoji dentro
 Si el veredicto (🟧/⚠️) sale bajo la tarjeta, va con ella. Sin `hermes` en el
 host, el mismo script acepta el JSON con `--input`.
 
+## 4-Layer Memory Handshake & Separation
+
+Always adhere to the 4-layer memory hierarchy:
+1. Memory Handshake: Consult Hindsight memory and session state before assuming facts about homelab services, user preferences, or past decisions.
+2. User Precedence: User explicit statements and real-time corrections ALWAYS override previous memory facts.
+3. Facts vs Procedures: Store facts, preferences, and entity states in Memory (Hindsight). Repetitive multi-step procedures, commands, or workflows MUST NOT be stored in memory — implement them as modular skills via `/skill-creator` or save them to runbooks in `homelab-ops`.
+4. Project Documentation: Reference repository docs (`homelab-ops`) for network topology, inventory, and host configs instead of keeping unbounded technical references in memory.
+
+## Quiet Hours (23:00 – 08:00)
+
+- Silence Non-Urgent Notifications: Background cron jobs, routine sensor sweeps, and non-critical reminders must never trigger push notifications or Telegram messages between 23:00 and 08:00.
+- Batch or Defer: Accumulate non-urgent status summaries for the morning review (after 08:00).
+- Exception: Send immediate alerts ONLY for P0 emergencies (host down, UPS on battery, leak/smoke detection, or active security alerts).
+
 ## Telegram Formatting & Anti-Flood Rule
 
 CRITICAL FOR TELEGRAM (mobile messenger):

@@ -1,0 +1,21 @@
+[Unit]
+Description=Llama.cpp Backend Server (GPU-accelerated)
+After=network.target
+
+[Service]
+Type=simple
+Environment="LD_LIBRARY_PATH=/home/sergi/.local/llama.cpp/bin"
+WorkingDirectory=/home/sergi/.local/llama.cpp
+ExecStart=/home/sergi/.local/llama.cpp/bin/llama-server \
+  --model /home/sergi/.local/llama.cpp/models/qwen3.8-27b-atx-swift.gguf \
+  --alias qwen3.8:27b,qwen3.8-27b,qwen2.5-coder-7b,qwen3.5:4b,default \
+  --host 127.0.0.1 \
+  --port 11435 \
+  --n-gpu-layers 99 \
+  --ctx-size 65536 \
+  --parallel 1 \
+  --timeout 300
+Restart=no
+
+[Install]
+WantedBy=default.target
