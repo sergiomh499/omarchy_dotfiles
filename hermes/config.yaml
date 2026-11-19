@@ -1,93 +1,20 @@
-_config_version: 53
-_left_core_installed:
-  - homeassistant
-_left_core_scoped:
-  - homeassistant
-approvals:
-  destructive_slash_confirm: false
-auxiliary:
-  approval:
-    model: beam-free
-    provider: opencode-go
-  compression:
-    model: beam-free
-    provider: opencode-go
-  curator:
-    model: beam-free
-    provider: opencode-go
-  kanban_decomposer:
-    model: beam-free
-    provider: opencode-go
-  mcp:
-    model: beam-free
-    provider: opencode-go
-  profile_describer:
-    model: beam-free
-    provider: opencode-go
-  review:
-    model: beam-free
-    provider: opencode-go
-  title_generation:
-    model: beam-free
-    provider: opencode-go
-  triage_specifier:
-    model: beam-free
-    provider: opencode-go
-  vision:
-    model: beam-free
-    provider: opencode-go
-  voice_chat:
-    model: beam-free
-    provider: opencode-go
-dashboard:
-  theme: mono
-gateway:
-  host: 0.0.0.0
-  port: 8642
-kanban:
-  auto_decompose: false
-known_plugin_toolsets:
-  acp:
-    - homeassistant
-  webhook:
-    - homeassistant
-mcp_servers:
-  context7:
-    enabled: false
-    url: https://mcp.context7.com/mcp
-  deepwiki:
-    enabled: false
-    url: https://mcp.deepwiki.com/mcp
-  homarr:
-    enabled: true
-    headers:
-      ApiKey: 8656ceef.9a2754d0bf6bd41756519c1efb31a9af3148fb313cb04be0
-    url: https://homarr.homelab.local/api/mcp
-  kiwi:
-    enabled: false
-    tools:
-      include:
-        - search-flight
-    url: https://mcp.kiwi.com
-  strava:
-    auth: oauth
-    enabled: false
-    url: https://mcp.strava.com/mcp
-  trivago:
-    enabled: false
-    url: https://mcp.trivago.com/mcp
-memory:
-  provider: hindsight
-  backend: hindsight
-  hindsight_base_url: http://192.168.1.126:8888
-  path: /opt/data/memory.db
+# Proveedor local (torre RTX 3080 Ti, ollama en 11434).
+# El default sigue siendo "auto" (opencode beam-free) — esto solo AÑADE una opción.
+# Uso: hermes chat --provider torre --model qwen3.5:4b
+providers:
+  torre:
+    base_url: "http://192.168.1.40:11434/v1"
+    api_key: "ollama"
 model:
-  api_mode: chat_completions
-  base_url: https://opencode.ai/zen/go/v1
-  default: beam-free
+  default: longcat-2.5-free
   provider: opencode-go
-  context_length: 64000
+  base_url: https://opencode.ai/zen/go/v1
+  api_mode: chat_completions
 fallback_providers:
+  - provider: opencode-go
+    model: beam-free
+    base_url: https://opencode.ai/zen/go/v1
+    api_mode: chat_completions
   - provider: opencode-go
     model: deepseek-v4.1-flash
     base_url: https://opencode.ai/zen/go/v1
@@ -95,40 +22,301 @@ fallback_providers:
   - provider: opencode-go
     model: mimo-v2.6-flash
     base_url: https://opencode.ai/zen/go/v1
+  - provider: torre
+    model: qwen3.5:4b
+    base_url: http://192.168.1.40:11434/v1
     api_mode: chat_completions
-platforms:
-  api_server:
-    enabled: true
-    extra:
-      host: 0.0.0.0
-      port: 8642
-  telegram:
-    enabled: true
-    home_channel:
-      chat_id: '4983947'
-      name: Arroz con Quejas
-      platform: telegram
-      user_id: '4983947'
-  webhook:
-    enabled: true
-    extra:
-      host: 0.0.0.0
-      port: 8644
-      secret: uptime-remediation-secret-2026
-  whatsapp:
-    enabled: false
-  whatsapp_cloud:
-    enabled: false
-plugins:
-  disabled: []
-  enabled:
-    - homeassistant
+_config_version: 53
 telemetry:
   shared_metrics:
     enabled: false
-    offer_version: 2
     send: false
+    offer_version: 2
+plugins:
+  enabled:
+    - advanced-delegation
+    - camofox
+    - disk-cleanup
+    - hermes-browser-extension
+    - hermes-lcm-x
+    - hermes-lcm-x-local-embeddings
+    - hermes-security
+    - hindsight
+    - homeassistant
+    - mcp-serve
+    - quota
+    - rea
+    - security-guidance
+    - spotify
+  disabled:
+    - artifact-relay
+  entries: {}
+_left_core_installed:
+  - homeassistant
+  - langfuse
+known_plugin_toolsets:
+  acp:
+    - homeassistant
+  webhook:
+    - homeassistant
+_left_core_scoped:
+  - homeassistant
+onboarding:
+  seen:
+    busy_input_prompt: true
 command_allowlist:
+  - copy/move file into system config path
+  - execute_code
+  - in-place edit of system config
+  - pipe decoded content to shell (possible command obfuscation)
+  - script execution via -e/-c flag
   - stop/restart system service
-agent:
-  max_turns: 8
+  - sudo with privilege flag (stdin/askpass/shell/list)
+memory:
+  provider: hindsight
+gateway:
+  multiplex_profiles: true
+
+dashboard:
+  basic_auth:
+    secret: ed909c275444aff5f9deefff7be8a4f3d226fb78f5d3a0db817a22be2b75694a
+platforms:
+  whatsapp:
+    enabled: false
+  telegram:
+    extra:
+      dm_topics:
+        - chat_id: 4983947
+          topics:
+            - name: General
+              icon_color: 7322096
+              thread_id: 821650
+            - name: Website
+              icon_color: 9367192
+              skill:
+                - claude-design
+                - popular-web-designs
+                - architecture-diagram
+                - dogfood
+              thread_id: 821651
+            - name: Research
+              icon_color: 16766590
+              skill:
+                - arxiv
+                - grounded-citations
+                - competitor-news-monitor
+                - blocked-page-recovery
+                - youtube-content
+                - xurl
+              thread_id: 821652
+            - name: Cron
+              icon_color: 16766590
+              skill:
+                - homelab
+                - opencode-go-usage
+                - quota-aware-dispatch
+              thread_id: 821664
+            - name: Homelab
+              icon_color: 13338331
+              skill:
+                - proxmox-admin
+                - headscale-admin
+                - herdr
+                - workstation-delegation
+                - homelab-notifications
+                - opencode-go-usage
+                - hermes-agent
+              thread_id: 821678
+            - name: Domotica
+              icon_color: 16749490
+              skill:
+                - home-assistant
+              thread_id: 821680
+            - name: Dev
+              icon_color: 7322096
+              skill:
+                - github
+                - systematic-debugging
+                - test-driven-development
+                - spike
+              thread_id: 821737
+            - name: Notas
+              icon_color: 9367192
+              skill: obsidian
+              thread_id: 821739
+            - name: Router
+              icon_color: 16711680
+              skill: router
+              thread_id: 821939
+            - name: Mejoras Hermes
+              icon_color: 7322096
+              skill:
+                - hermes-agent
+                - workstation-delegation
+                - homelab
+              thread_id: 824608
+    channel_overrides:
+      '821737':
+        model: glm-5.3
+        provider: opencode-go
+      '821652':
+        model: glm-5.3
+        provider: opencode-go
+    enabled: true
+    home_channel:
+      platform: telegram
+      chat_id: '4983947'
+      name: Arroz con Quejas
+      thread_id: '821650'
+      user_id: '4983947'
+  webhook:
+    enabled: true
+mcp_servers:
+  finanze:
+    url: https://finanze.homelab.local/mcp
+    enabled: false
+    headers:
+      Authorization: Bearer DcnSGpmQaBDP5Fr4NOKGUbC8mGylC0OV5ncrdq4zQc8
+  alltrails:
+    url: https://www.alltrails.com/mcp
+    enabled: true
+  cloudflare:
+    url: https://mcp.cloudflare.com/mcp?codemode=false
+    auth: oauth
+    enabled: true
+    tools:
+      exclude:
+        - docs
+        - '*_radar_*'
+        - '*_accounts_magic_*'
+        - '*_accounts_mnm_*'
+        - '*_accounts_cni_*'
+        - '*_accounts_teamnet_*'
+        - '*_accounts_cloudforceone_*'
+        - '*_accounts_dlp_*'
+        - '*_accounts_devices*'
+        - '*_accounts_dex_*'
+        - '*_accounts_datasecurity_*'
+        - '*_accounts_emailsecurity_*'
+        - '*_accounts_scim_*'
+        - '*_accounts_gateway*'
+        - '*_accounts_zerotrust_*'
+        - '*_accounts_one_*'
+        - '*_accounts_brandprotection_*'
+        - '*_accounts_intel_*'
+        - '*_accounts_urlscanner_*'
+        - '*_accounts_vuln_scanner_*'
+        - '*_zones_securitycenter_*'
+        - '*_accounts_securitycenter_*'
+        - '*_zones_api_gateway_*'
+        - '*_zones_schema_validation*'
+        - '*_zones_token_validation*'
+        - '*_zones_waiting_rooms*'
+        - '*_accounts_addressing_*'
+        - '*_accounts_shares*'
+        - '*_accounts_slurper_*'
+        - '*_zones_web3_*'
+        - '*_accounts_flagship_*'
+        - '*_zones_secondary_dns_*'
+        - '*_accounts_secondary_dns_*'
+        - '*_user_load_balancers*'
+  context7:
+    url: https://mcp.context7.com/mcp
+    enabled: true
+  craft:
+    url: https://mcp.craft.do/my/mcp
+    auth: oauth
+    enabled: true
+  deepwiki:
+    url: https://mcp.deepwiki.com/mcp
+    enabled: true
+  gitlab:
+    url: https://gitlab.com/api/v4/mcp
+    auth: oauth
+    enabled: true
+    tools:
+      exclude:
+        - get_mcp_server_version
+        - list_duo_sessions
+  globalping:
+    url: https://mcp.globalping.dev/mcp
+    auth: oauth
+    enabled: true
+    tools:
+      exclude:
+        - help
+        - compareLocations
+        - limits
+  indeed:
+    url: https://mcp.indeed.com/claude/mcp
+    auth: oauth
+    enabled: true
+  kiwi:
+    url: https://mcp.kiwi.com
+    enabled: true
+    tools:
+      include:
+        - search-flight
+  motherduck:
+    url: https://api.motherduck.com/mcp
+    auth: oauth
+    enabled: true
+    tools:
+      include:
+        - list_columns
+        - list_databases
+        - list_macros
+        - list_shares
+        - list_tables
+        - list_views
+        - query
+        - query_rw
+        - search_catalog
+  trivago:
+    url: https://mcp.trivago.com/mcp
+    enabled: true
+  wallapop:
+    command: npx
+    args:
+      - -y
+      - '@yhugosoares/wallapop-mcp'
+      - --connect-timeout
+      - '180'
+    enabled: true
+  idealo:
+    url: https://mcp.idealo.com/mcp
+    auth: oauth
+    enabled: true
+    oauth:
+      timeout: 900
+  tiendas-es:
+    command: /opt/hermes/.venv/bin/python
+    args:
+      - /opt/data/mcp/tiendas-es/server.py
+      - --connect-timeout
+      - '60'
+    enabled: true
+monitoring:
+  gateway_health_export:
+    enabled: true
+local_runtime:
+  enabled: true
+webapp:
+  enabled: true
+streaming:
+  enabled: true
+sessions:
+  auto_prune: true
+compression:
+  enabled: true
+  idle_compact_after_seconds: 14400
+context:
+  engine: lcm-x
+stt:
+  provider: torre-whisper
+  providers:
+    torre-whisper:
+      type: command
+      command: /opt/data/scripts/whisper_torre.sh {input_path} {output_path}
+      language: es
+  language: es
