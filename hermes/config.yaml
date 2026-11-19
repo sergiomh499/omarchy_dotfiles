@@ -37,6 +37,7 @@ plugins:
   enabled:
     - advanced-delegation
     - camofox
+    - chat-length
     - disk-cleanup
     - hermes-browser-extension
     - hermes-lcm-x
