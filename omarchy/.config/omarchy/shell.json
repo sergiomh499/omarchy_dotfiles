@@ -13,6 +13,31 @@
           "verticalFormat": "HH\n—\nmm"
         },
         {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Madrid",
+              "zone": "Europe/Madrid"
+            },
+            {
+              "name": "Dubai",
+              "zone": "Asia/Dubai"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "New York",
+              "zone": "America/New_York"
+            }
+          ]
+        },
+        {
           "id": "omarchy.system-update"
         },
         {
@@ -24,19 +49,21 @@
           "id": "omarchy.menu"
         },
         {
-          "id": "tornikegomareli.spaces"
+          "id": "tornikegomareli.spaces",
+          "activeStyle": "subtle",
+          "labelStyle": "number",
+          "density": "normal",
+          "settingsButton": "never",
+          "iconStyle": "color",
+          "showApps": "all",
+          "groupApps": true,
+          "focusedTitle": false
         },
         {
           "id": "omarchy.media"
         }
       ],
       "right": [
-        {
-          "id": "omarchy.tray"
-        },
-        {
-          "id": "wian47.removable-drives"
-        },
         {
           "id": "io.github.twiking.omasettings"
         },
@@ -53,20 +80,40 @@
           "id": "gladimdim.config-sync"
         },
         {
-          "id": "jrmmhm.pocket",
-          "members": "io.github.twiking.omasettings, omaplug, zeru.portwatch, thefreshoffice.speaker-calibrator, gladimdim.config-sync"
+          "id": "omarchy.tray",
+          "pinned": [
+            "chrome_status_icon_1"
+          ]
         },
         {
-          "id": "omarchy.agents"
+          "id": "jrmmhm.pocket",
+          "members": "omarchy.tray, io.github.twiking.omasettings, omaplug, zeru.portwatch, thefreshoffice.speaker-calibrator, gladimdim.config-sync",
+          "pinned": ""
         },
         {
           "id": "omarchy.keyboard-layout"
         },
         {
-          "id": "jesseburlamaque.antigravity-usage"
+          "id": "wian47.removable-drives"
+        },
+        {
+          "id": "janitorhead.quotatank",
+          "sourcesVersion": 1,
+          "setupDone": true,
+          "sources": "[]",
+          "barShowResets": false,
+          "barShowPeriods": false
+        },
+        {
+          "id": "io.github.salemsayed.omawarden",
+          "serverUrl": "https://vaultwarden.homelab.local",
+          "cliCommand": "env NODE_EXTRA_CA_CERTS=/home/sergio/.config/caddy-internal-ca.pem bw"
         },
         {
           "id": "jankeesvw.herdr"
+        },
+        {
+          "id": "omarchy.tailscale"
         },
         {
           "id": "omarchy.bluetooth"
@@ -89,10 +136,13 @@
         {
           "id": "blackcode.power-menu"
         }
-      ]
+      ],
+      "centerBegin": [],
+      "centerEnd": [],
+      "tray": []
     },
     "position": "top",
-    "transparent": true,
+    "transparent": false,
     "id": "charlieras262.floating-bar"
   },
   "idle": {

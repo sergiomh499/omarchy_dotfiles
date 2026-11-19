@@ -67,3 +67,29 @@ providers:
         name: Gemini 3.8 Flash (1M Context)
       gemini-3.1-flash-lite:
         name: Gemini 3.1 Flash Lite (Fast / Smol)
+
+  # --- OpenCode Go: free models & high-throughput overrides ---
+  opencode-go:
+    modelOverrides:
+      longcat-2.5-preview-free:
+        name: LongCat 2.5 Preview (Free - 1M Context)
+      step-5-preview-free:
+        name: Step 5 Preview (Free - 1M Context)
+      space-bunny-free:
+        name: Space Bunny (Free - 1M Context)
+      ox-alpha-free:
+        name: Ox Alpha (Free - 1M Context)
+      glm-5.3-flash:
+        name: GLM 5.3 Flash (1M Context - Coding Fast)
+      mimo-v2.6-pro:
+        name: MiMo V2.6 Pro (1M Context - Reasoning/Planning)
+      mimo-v2.6-flash:
+        name: MiMo V2.6 Flash (1M Context - Smol/Fast)
+
+  # --- Local Ollama on torre (RTX 3080 Ti) — models auto-discovered ---
+  ollama:
+    baseUrl: "http://127.0.0.1:11434"
+    api: openai-responses
+    auth: none
+    discovery:
+      type: ollama

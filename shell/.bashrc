@@ -19,7 +19,7 @@ source "$OMARCHY_PATH/default/bash/rc"
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 
-. "$HOME/.local/share/../bin/env"
+[ -f "$HOME/.local/share/../bin/env" ] && . "$HOME/.local/share/../bin/env"
 [ -f "$HOME/.env.local" ] && . "$HOME/.env.local"
 
 # Android Tools & Java 17 local path
@@ -29,3 +29,12 @@ export ANDROID_HOME="$HOME/.local/android-sdk"
 export ANDROID_SDK_ROOT="$HOME/.local/android-sdk"
 export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH"
+
+# Prepend user binaries so local wrappers take precedence over raw mise shims
+export PATH="$HOME/.local/bin:$PATH"
+alias pi="$HOME/.local/bin/pi"
+
+# Hindsight: trust the homelab's internal Caddy CA (hindsight-api.homelab.local)
+if [ -z "$NODE_EXTRA_CA_CERTS" ] && [ -f "$HOME/.config/ssl/caddy-local-root.crt" ]; then
+    export NODE_EXTRA_CA_CERTS="$HOME/.config/ssl/caddy-local-root.crt"
+fi

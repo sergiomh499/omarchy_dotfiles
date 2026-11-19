@@ -15,7 +15,7 @@ disabledProviders:
   - llama.cpp
   - lm-studio
 modelRoles:
-  default: opencode-go/mimo-v2.6-flash
+  default: opencode-go/deepseek-v4.1-flash
   smol: opencode-go/beam-free
   slow: opencode-go/deepseek-v4-pro
   plan: opencode-go/deepseek-v4-pro
@@ -27,7 +27,7 @@ modelRoles:
   memory: opencode-go/beam-free
   judge: opencode-go/beam-free
   advisor: opencode-go/mimo-v2.6-pro
-defaultThinkingLevel: low
+defaultThinkingLevel: auto
 statusLine:
   preset: default
   separator: slash

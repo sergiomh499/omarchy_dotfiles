@@ -8,3 +8,6 @@
 ## 2. Multi-Agent Ecosystem Delegation
 - **Smart Home & Homelab Operations**: Delegate Home Assistant controls, sensor lookups, Telegram notifications, and container tasks to Hermes (`hermes-ct`) using the `hermes-delegation` skill or direct API at `http://192.168.1.125:8642`.
 - **Heavy Terminal Batch Tasks / Quota Relief**: If session quota is approaching limits, offload autonomous test suites, routine refactorings, or Git churn to Oh My Pi (`omp`) via Herdr (`herdr agent prompt ...`) or direct CLI (`omp --prompt '...'`).
+
+## 3. Homelab & Workstation Network Directives
+- **Torre Ethernet & Wake-on-LAN**: When `torre` is detected connected via physical Ethernet (`enp6s0` carrier up / cable plugged in), verify and apply Wake-on-LAN persistence (`nmcli connection modify 'Wired connection 1' 802-3-ethernet.wake-on-lan magic` or `ethtool -s enp6s0 wol g`) and update UpSnap / Homepage if its local IP changes.
