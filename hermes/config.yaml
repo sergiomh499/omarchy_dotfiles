@@ -97,6 +97,12 @@ platforms:
           topics:
             - name: General
               icon_color: 7322096
+              skill:
+                - productivity
+                - superpowers
+                - workstation-delegation
+                - quota-aware-dispatch
+                - i-have-adhd
               thread_id: 821650
             - name: Website
               icon_color: 9367192
@@ -133,6 +139,8 @@ platforms:
                 - homelab-notifications
                 - opencode-go-usage
                 - hermes-agent
+                - backrest-admin
+                - immich-admin
               thread_id: 821678
             - name: Domotica
               icon_color: 16749490
@@ -146,10 +154,15 @@ platforms:
                 - systematic-debugging
                 - test-driven-development
                 - spike
+                - simplify-code
+                - codebase-inspection
+                - workstation-delegation
               thread_id: 821737
             - name: Notas
               icon_color: 9367192
-              skill: obsidian
+              skill:
+                - obsidian
+                - document-to-action-items
               thread_id: 821739
             - name: Router
               icon_color: 16711680
@@ -168,6 +181,12 @@ platforms:
         provider: opencode-go
       '821652':
         model: glm-5.3
+        provider: opencode-go
+      '821664':
+        model: longcat-2.5-free
+        provider: opencode-go
+      '821680':
+        model: beam-free
         provider: opencode-go
     enabled: true
     home_channel:
