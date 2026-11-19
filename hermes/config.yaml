@@ -48,9 +48,14 @@ plugins:
     - rea
     - security-guidance
     - spotify
+    - walkie-talkie
   disabled:
     - artifact-relay
-  entries: {}
+  entries:
+    walkie-talkie:
+      allow_gateway_injection: true
+    hindsight:
+      recall_indicator: false
 _left_core_installed:
   - homeassistant
   - langfuse
@@ -74,6 +79,7 @@ command_allowlist:
   - sudo with privilege flag (stdin/askpass/shell/list)
 memory:
   provider: hindsight
+  recall_indicator: false
 gateway:
   multiplex_profiles: true
 
@@ -179,7 +185,7 @@ mcp_servers:
       Authorization: Bearer DcnSGpmQaBDP5Fr4NOKGUbC8mGylC0OV5ncrdq4zQc8
   alltrails:
     url: https://www.alltrails.com/mcp
-    enabled: true
+    enabled: false
   cloudflare:
     url: https://mcp.cloudflare.com/mcp?codemode=false
     auth: oauth
@@ -250,17 +256,17 @@ mcp_servers:
   indeed:
     url: https://mcp.indeed.com/claude/mcp
     auth: oauth
-    enabled: true
+    enabled: false
   kiwi:
     url: https://mcp.kiwi.com
-    enabled: true
+    enabled: false
     tools:
       include:
         - search-flight
   motherduck:
     url: https://api.motherduck.com/mcp
     auth: oauth
-    enabled: true
+    enabled: false
     tools:
       include:
         - list_columns
@@ -274,7 +280,7 @@ mcp_servers:
         - search_catalog
   trivago:
     url: https://mcp.trivago.com/mcp
-    enabled: true
+    enabled: false
   wallapop:
     command: npx
     args:
