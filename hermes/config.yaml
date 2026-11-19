@@ -175,6 +175,12 @@ platforms:
                 - workstation-delegation
                 - homelab
               thread_id: 824608
+            - name: Compras & Ofertas
+              icon_color: 16749490
+              skill:
+                - shopping-research
+                - product-price-monitor
+              thread_id: 824041
     channel_overrides:
       '821737':
         model: glm-5.3
@@ -187,6 +193,9 @@ platforms:
         provider: opencode-go
       '821680':
         model: beam-free
+        provider: opencode-go
+      '824041':
+        model: deepseek-v4.1-flash
         provider: opencode-go
     enabled: true
     home_channel:
