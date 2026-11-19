@@ -1,0 +1,12 @@
+[Unit]
+Description=Llama.cpp On-Demand Proxy (Scales to Zero / Port 11434)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/sergi/.local/llama.cpp/bin/llama-ondemand-proxy.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
