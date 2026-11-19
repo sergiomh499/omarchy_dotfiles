@@ -11,7 +11,7 @@ ExecStart=/home/sergi/.local/llama.cpp/bin/llama-server \
   --alias qwen3.8:27b,qwen3.8-27b,qwen2.5-coder-7b,qwen3.5:4b,default \
   --host 127.0.0.1 \
   --port 11435 \
-  --n-gpu-layers auto \
+  --n-gpu-layers 61 \
   --flash-attn on \
   --cache-type-k q4_0 \
   --cache-type-v q4_0 \
