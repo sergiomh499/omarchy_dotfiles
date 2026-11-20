@@ -11,7 +11,8 @@ ExecStart=/home/sergi/.local/llama.cpp/bin/llama-server \
   --alias qwen3.8:27b,qwen3.8-27b,qwen2.5-coder-7b,qwen3.5:4b,default \
   --host 127.0.0.1 \
   --port 11435 \
-  --n-gpu-layers 99 \
+  --fit on \
+  --fit-target 384 \
   --batch-size 256 \
   --ubatch-size 128 \
   --flash-attn on \
